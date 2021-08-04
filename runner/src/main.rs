@@ -2,7 +2,7 @@ use runner::*;
 use std::collections::HashMap;
 
 fn print_stdout(memory: &[u8]) {
-    for byte in &memory[(MEMSIZE - STDOUT_SIZE)..] {
+    for byte in &memory[MEMSIZE..] {
         if *byte == 0 {
             break;
         }
@@ -16,7 +16,7 @@ fn main() {
     let mut memory = [0u8; MEMSIZE + STDOUT_SIZE];
     let mut variables: HashMap<String, usize> = HashMap::new();
 
-    variables.insert("STDOUT".to_string(), MEMSIZE + 1);
+    variables.insert("std.stdout".to_string(), MEMSIZE);
 
     for instruction in asm.split("\n") {
         if instruction == "" {
@@ -38,6 +38,10 @@ fn main() {
 
             "var" => set_variable(&mut memory, arguments, &mut variables),
 
+            "print_byte" => {
+                print_byte(&mut memory, arguments, &mut variables);
+            }
+
             "!" => {
                 // Ignore comment
             }
@@ -48,8 +52,6 @@ fn main() {
             }
         }
     }
-
-    // eprintln!("Debug: {:?}", memory);
 
     print_stdout(&memory);
 }
