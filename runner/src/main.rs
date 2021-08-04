@@ -14,7 +14,11 @@ fn main() {
     let asm = std::fs::read_to_string("main.yam").unwrap();
 
     let mut memory = [0u8; MEMSIZE + STDOUT_SIZE];
+
     let mut variables: HashMap<String, usize> = HashMap::new();
+    let mut variable_types: HashMap<String, YamType> = HashMap::new();
+
+    let mut empty_spot = 0;
 
     variables.insert("std.stdout".to_string(), MEMSIZE);
 
@@ -36,7 +40,7 @@ fn main() {
 
             "dec" => decrement(&mut memory, arguments, &mut variables),
 
-            "var" => set_variable(arguments, &mut variables),
+            "var" => set_variable(&mut memory, arguments, &mut variables, &mut empty_spot),
 
             "print_byte" => {
                 print_byte(&mut memory, arguments, &mut variables);

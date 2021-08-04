@@ -1,2 +1,5 @@
 ! Hello world
-print_byte 'a'
+var byte1 65
+var byte2 10
+print_byte byte1
+print_byte byte2

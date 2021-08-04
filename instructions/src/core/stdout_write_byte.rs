@@ -6,5 +6,6 @@ pub fn core_stdout_write_byte(memory: &mut [u8], variables: &mut HashMap<String,
     let current_stdout = core_get_variable(variables, "std.stdout".to_string()).unwrap();
 
     memory[current_stdout] = byte;
+
     core_set_variable(variables, "std.stdout".to_string(), current_stdout + 1);
 }

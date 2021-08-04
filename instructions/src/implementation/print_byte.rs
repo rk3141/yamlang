@@ -13,6 +13,7 @@ pub fn print_byte(memory: &mut [u8], arguments: &[&str], variables: &mut HashMap
         core::core_stdout_write_byte(memory, variables, byte);
     } else {
         let pos = core::core_get_variable(variables, value.to_string());
+
         if pos.is_some() {
             let pos = pos.unwrap();
             core::core_stdout_write_byte(memory, variables, memory[pos]);
