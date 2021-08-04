@@ -1,7 +1,7 @@
 [workspace]
 
 members = [
-  "runner",
+  "bin",
   "instructions",
   "util_macros",
   "runtime-constants"

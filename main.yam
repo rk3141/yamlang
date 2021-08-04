@@ -1,5 +1,13 @@
 ! Hello world
-var byte1 65
-var byte2 10
-print_byte byte1
-print_byte byte2
+print_byte 'H'
+print_byte 'e'
+print_byte 'l'
+print_byte 'l'
+print_byte 'o'
+print_byte ' '
+print_byte 'W'
+print_byte 'o'
+print_byte 'r'
+print_byte 'l'
+print_byte 'd'
+print_byte '!'

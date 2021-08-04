@@ -1,5 +1,5 @@
-use runner::*;
-use std::collections::HashMap;
+use bin::*;
+use std::{collections::HashMap, iter::Peekable};
 
 fn print_stdout(memory: &[u8]) {
     for byte in &memory[MEMSIZE..] {
@@ -22,7 +22,7 @@ fn main() {
 
     variables.insert("std.stdout".to_string(), MEMSIZE);
 
-    for instruction in asm.split("\n") {
+    for (line, instruction) in asm.split("\n").enumerate() {
         if instruction == "" {
             continue;
         }
@@ -30,6 +30,29 @@ fn main() {
         let chunks = instruction.split(" ").collect::<Vec<&str>>();
 
         let (&keyword, arguments) = chunks.split_first().unwrap();
+
+        let mut new_argument = vec![];
+        let mut current = String::new();
+
+        for piece in arguments {
+            current += piece;
+            if piece == &"'" {
+                current += " '";
+            }
+
+            new_argument.push(current);
+            current = String::new();
+
+            if new_argument.len() == 1 {
+                break;
+            }
+        }
+
+        let arguments = new_argument
+            .iter()
+            .map(|v| v.as_str())
+            .collect::<Vec<&str>>();
+        let arguments = arguments.as_slice();
 
         match keyword {
             "seb" => set_byte(&mut memory, arguments, &variables),
