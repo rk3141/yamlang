@@ -36,7 +36,7 @@ fn main() {
 
             "dec" => decrement(&mut memory, arguments, &mut variables),
 
-            "var" => set_variable(&mut memory, arguments, &mut variables),
+            "var" => set_variable(arguments, &mut variables),
 
             "print_byte" => {
                 print_byte(&mut memory, arguments, &mut variables);
