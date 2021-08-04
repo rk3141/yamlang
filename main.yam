@@ -1,4 +1,5 @@
 ! Hello world
+var str rishit
 print_byte 'H'
 print_byte 'e'
 print_byte 'l'

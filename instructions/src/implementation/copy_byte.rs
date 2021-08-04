@@ -1,6 +1,6 @@
 use std::collections::HashMap;
 
-use util_macros::*;
+use utils::*;
 
 pub fn copy_byte(memory: &mut [u8], arguments: &[&str], variables: &HashMap<String, usize>) {
     let from = get_argument_int_if_not_variable!(arguments, variables, 0);

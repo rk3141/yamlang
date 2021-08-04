@@ -3,6 +3,6 @@
 members = [
   "bin",
   "instructions",
-  "util_macros",
+  "utils",
   "runtime-constants"
 ]

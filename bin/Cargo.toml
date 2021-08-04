@@ -7,5 +7,5 @@ edition = "2018"
 
 [dependencies]
 instructions = { path = "../instructions" }
-util_macros = { path = "../util_macros" }
+utils = { path = "../utils" }
 runtime-constants = { path = "../runtime-constants" }

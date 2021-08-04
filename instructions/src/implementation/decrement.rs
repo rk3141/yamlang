@@ -1,6 +1,6 @@
 use std::collections::HashMap;
 
-use util_macros::*;
+use utils::*;
 
 pub fn decrement(memory: &mut [u8], arguments: &[&str], variables: &mut HashMap<String, usize>) {
     let what = get_argument!(arguments, 0);

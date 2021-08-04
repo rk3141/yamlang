@@ -17,12 +17,13 @@ fn main() {
 
     let mut variables: HashMap<String, usize> = HashMap::new();
     let mut variable_types: HashMap<String, YamType> = HashMap::new();
+    let mut variable_offset_map: HashMap<String, usize> = HashMap::new();
 
     let mut empty_spot = 0;
 
     variables.insert("std.stdout".to_string(), MEMSIZE);
 
-    for (line, instruction) in asm.split("\n").enumerate() {
+    for (_line, instruction) in asm.split("\n").enumerate() {
         if instruction == "" {
             continue;
         }
@@ -34,16 +35,19 @@ fn main() {
         let mut new_argument = vec![];
         let mut current = String::new();
 
+        let mut found_quote = false;
+
         for piece in arguments {
             current += piece;
             if piece == &"'" {
                 current += " '";
+                found_quote = true;
             }
 
             new_argument.push(current);
             current = String::new();
 
-            if new_argument.len() == 1 {
+            if new_argument.len() == 1 && found_quote {
                 break;
             }
         }
@@ -63,7 +67,13 @@ fn main() {
 
             "dec" => decrement(&mut memory, arguments, &mut variables),
 
-            "var" => set_variable(&mut memory, arguments, &mut variables, &mut empty_spot),
+            "var" => set_variable(
+                &mut memory,
+                arguments,
+                &mut variables,
+                &mut empty_spot,
+                &mut variable_offset_map,
+            ),
 
             "print_byte" => {
                 print_byte(&mut memory, arguments, &mut variables);
