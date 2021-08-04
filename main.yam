@@ -1,5 +1,5 @@
 ! Hello world
-var STDOUT 896
+
 seb STDOUT 104
 inc STDOUT
 seb STDOUT 101

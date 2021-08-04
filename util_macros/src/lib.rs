@@ -23,3 +23,10 @@ macro_rules! get_argument_int_if_not_variable {
         }
     };
 }
+
+#[macro_export]
+macro_rules! throw_runtime_error {
+    ($($args:expr),*) => {
+        panic!($($args),*);
+    };
+}

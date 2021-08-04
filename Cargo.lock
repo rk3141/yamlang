@@ -6,6 +6,7 @@ version = 3
 name = "instructions"
 version = "0.1.0"
 dependencies = [
+ "runtime-constants",
  "util_macros",
 ]
 
@@ -14,8 +15,13 @@ name = "runner"
 version = "0.1.0"
 dependencies = [
  "instructions",
+ "runtime-constants",
  "util_macros",
 ]
+
+[[package]]
+name = "runtime-constants"
+version = "0.1.0"
 
 [[package]]
 name = "util_macros"

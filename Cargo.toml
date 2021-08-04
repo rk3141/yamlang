@@ -3,5 +3,6 @@
 members = [
   "runner",
   "instructions",
-  "util_macros"
+  "util_macros",
+  "runtime-constants"
 ]

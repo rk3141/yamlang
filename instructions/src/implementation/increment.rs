@@ -8,10 +8,10 @@ pub fn increment(memory: &mut [u8], arguments: &[&str], variables: &mut HashMap<
     if let Ok(address) = what.parse::<usize>() {
         memory[address] += 1;
     } else {
-        let variable_reference = variables
-            .get_mut(&what.to_string())
+        let &variable_location = variables
+            .get(&what.to_string())
             .expect(format!("variable `{}` doesnt exist", what).as_str());
 
-        *variable_reference += 1;
+        memory[variable_location] += 1;
     }
 }

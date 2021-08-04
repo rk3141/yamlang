@@ -1,11 +1,8 @@
 use runner::*;
 use std::collections::HashMap;
 
-const MEMSIZE: usize = 1024;
-const STDOUT_LOC: usize = 896;
-
 fn print_stdout(memory: &[u8]) {
-    for byte in &memory[STDOUT_LOC..] {
+    for byte in &memory[(MEMSIZE - STDOUT_SIZE)..] {
         if *byte == 0 {
             break;
         }
@@ -16,8 +13,10 @@ fn print_stdout(memory: &[u8]) {
 fn main() {
     let asm = std::fs::read_to_string("main.yam").unwrap();
 
-    let mut memory = [0u8; MEMSIZE];
+    let mut memory = [0u8; MEMSIZE + STDOUT_SIZE];
     let mut variables: HashMap<String, usize> = HashMap::new();
+
+    variables.insert("STDOUT".to_string(), MEMSIZE + 1);
 
     for instruction in asm.split("\n") {
         if instruction == "" {
@@ -29,13 +28,9 @@ fn main() {
         let (&keyword, arguments) = chunks.split_first().unwrap();
 
         match keyword {
-            "seb" => {
-                set_byte(&mut memory, arguments, &variables);
-            }
+            "seb" => set_byte(&mut memory, arguments, &variables),
 
-            "cpy" => {
-                copy_byte(&mut memory, arguments, &variables);
-            }
+            "cpy" => copy_byte(&mut memory, arguments, &variables),
 
             "inc" => increment(&mut memory, arguments, &mut variables),
 
