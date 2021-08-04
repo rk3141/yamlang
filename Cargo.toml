@@ -1,0 +1,7 @@
+[workspace]
+
+members = [
+  "runner",
+  "instructions",
+  "util_macros"
+]
