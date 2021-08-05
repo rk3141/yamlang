@@ -1,5 +1,5 @@
 use bin::*;
-use std::{collections::HashMap, iter::Peekable};
+use std::collections::HashMap;
 
 fn print_stdout(memory: &[u8]) {
     for byte in &memory[MEMSIZE..] {
@@ -17,7 +17,7 @@ fn main() {
 
     let mut variables: HashMap<String, usize> = HashMap::new();
     let mut variable_types: HashMap<String, YamType> = HashMap::new();
-    let mut variable_offset_map: HashMap<String, usize> = HashMap::new();
+    let mut variable_size_map: HashMap<String, usize> = HashMap::new();
 
     let mut empty_spot = 0;
 
@@ -72,19 +72,25 @@ fn main() {
                 arguments,
                 &mut variables,
                 &mut empty_spot,
-                &mut variable_offset_map,
+                &mut variable_size_map,
+                &mut variable_types,
             ),
 
-            "print_byte" => {
-                print_byte(&mut memory, arguments, &mut variables);
-            }
+            "print_byte" => print_byte(&mut memory, arguments, &mut variables),
+            "print_variable" => print_variable(
+                &mut memory,
+                arguments,
+                &mut variables,
+                &variable_size_map,
+                &variable_types,
+            ),
 
             "!" => {
                 // Ignore comment
             }
 
             _ => {
-                eprintln!("Debug: {:?}", memory);
+                eprintln!("Debug: {:?}", &memory[0..128]);
                 panic!("whats that keyword: {:?}", keyword);
             }
         }

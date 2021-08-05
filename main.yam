@@ -1,14 +1,18 @@
-! Hello world
-var str rishit
-print_byte 'H'
-print_byte 'e'
-print_byte 'l'
-print_byte 'l'
-print_byte 'o'
+! Example
+var info "yamlang-beta"
+var name "rishit"
+var surname "khandelwal\n"
+
+print_variable info
 print_byte ' '
-print_byte 'W'
-print_byte 'o'
-print_byte 'r'
-print_byte 'l'
+print_byte 'M'
+print_byte 'a'
 print_byte 'd'
-print_byte '!'
+print_byte 'e'
+print_byte ' '
+print_byte 'B'
+print_byte 'y'
+print_byte ' '
+print_variable name
+print_byte ' '
+print_variable surname
